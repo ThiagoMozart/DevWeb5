@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+
+ {% block title %}
+      Warhammer Dashboard
+  {% endblock %}
+
+    {% block body %}
+    <main>
+      <div class="container-fluid p-0 align-items-center">
+        <div class="row m-0">
+          <div class="col-12 col-md-3">
+            <div class="sidebar bg-dark">
+              <ul class="list-unstyled text-center px-2">
+                <li class="container text-warning">
+                  <h4 class="pt-2">
+                    COMPONENTS
+                  </h4>
+                </li>
+                <li class="active w-100">
+                  <a href="#" class="text-decoration-none px-3 py-2 d-block"
+                    >SearchBar</a
+                  >
+                </li>
+                <li class="active w-100">
+                  <a href="#" class="text-decoration-none px-3 py-2 d-block"
+                    >Badge</a
+                  >
+                </li>
+                <li class="active w-100">
+                  <a href="#" class="text-decoration-none px-3 py-2 d-block"
+                    >Nav & Tab</a
+                  >
+                </li>
+                <li class="active w-100">
+                  <a href="#" class="text-decoration-none px-3 py-2 d-block"
+                    >Alert</a
+                  >
+                </li>
+                <li class="active w-100">
+                  <a href="#" class="text-decoration-none px-3 py-2 d-block"
+                    >Progress</a
+                  >
+                </li>
+              </ul>
+              <hr class="h-color mx-2"/>
+              <ul class="list-unstyled text-center px-2 pb-2">
+                <li>
+                  <button type="button" class="btn btn-outline-warning w-100">
+                    Settings
+                  </button>
+                </li>
+                <li class="mt-2">
+                  <button type="button" class="btn btn-outline-warning w-100 position-relative">
+                    Notifications
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      99+
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-9">
+            <div class="row">
+              <div class="col-12">
+                <div class="alert alert-warning" role="alert">
+                  New features comming soon!
+                  <div class="progress">
+                    <div
+                      class="progress-bar bg-dark"
+                      role="progressbar"
+                      style="width: 75%"
+                      aria-valuenow="25"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    >
+                      75%
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6 mt-2">
+                <div class="d-flex align-items-start">
+                  <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <button class="btn btn-outline-warning active" id="v-pills-1" data-bs-toggle="pill" data-bs-target="#v-pills--1" type="button" role="tab" aria-controls="v-pills--1" aria-selected="true">News</button>
+                    <button class="btn btn-outline-warning mt-2" id="v-pills-2" data-bs-toggle="pill" data-bs-target="#v-pills--2" type="button" role="tab" aria-controls="v-pills--2" aria-selected="false">Games</button>
+                    <button class="btn btn-outline-warning mt-2" id="v-pills-3" data-bs-toggle="pill" data-bs-target="#v-pills--3" type="button" role="tab" aria-controls="v-pills--3" aria-selected="false">HQs</button>
+                    <button class="btn btn-outline-warning mt-2" id="v-pills-4" data-bs-toggle="pill" data-bs-target="#v-pills--4" type="button" role="tab" aria-controls="v-pills--4" aria-selected="false">Wiki</button>
+                  </div>
+                  <div class="tab-content w-100 mx-1" id="v-pills-tabContent">
+                    {% for item in news %}
+                        <div class="tab-pane fade show {% if forloop.counter == 1 %}active{% endif %}" id="v-pills--{{ forloop.counter }}" role="tabpanel" aria-labelledby="v-pills-{{ forloop.counter }}" tabindex="{{ forloop.counter0 }}">
+                            <div class="card bg-dark">
+                                <h5 class="card-header text-white">{{ item.title }}</h5>
+                                <p class="card-text text-white">{{ item.description }}</p>
+                                <a href="#" class="btn btn-outline-warning">Checkout</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6 mt-2">
+                <img
+                src="{% static krieg.path  %}" class="img-fluid"
+              />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  {% endblock %}

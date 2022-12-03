@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+ {% block title %}
+      Warhammer History
+  {% endblock %}
+
+  {% block body %}
+    <main>
+      <div class="container-fluid">
+      <div class="row">
+        {% for item in histories %}
+          <div class="col-12 col-md-4 mb-2">
+            <div class="card">
+                <img src="{% static item.image.path %}" alt="{{ item.image.name }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.battle_name }}</h5>
+                    <p class="card-text">
+                        {{ item.description }}
+                    </p>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle"
+                                type="button"
+                                id="{{ item.battle_name }}"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            Curiosity
+                        </button>
+                        <ul class="dropdown-menu p-4 text-muted"
+                            aria-labelledby="{{ item.battle_name }}"
+                            style="max-width: 250px"
+                        >
+                            <li>
+                                {{ item.curiosity }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      </div>
+    </main>
+  {% endblock %}
+
+
+

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+ {% block title %}
+      Warhammer Shop
+  {% endblock %}
+
+  {% block body %}
+    <main class="container">
+        <div class="mb-4">
+            <h5 class="text-warning">Search an Item</h5>
+            <hr class="mt-0">
+        </div>
+
+        <form action="" method="get" class="mb-4">
+            <div class="form-group row" style="margin-bottom: 10px">
+                <label for="id_name" class="col-lg-2 col-form-label font-weight-bold text-white">Name</label>
+                <div class="col-lg-10">
+                    {{ form.name }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 offset-lg-2">
+                    <button type="submit" class="btn btn-warning">
+                        <div class="d-flex align-items-center text-white">Search</div>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div style="min-height: 212px">
+            {% if products %}
+                <h5 class="mb-3 text-warning">Show Products</h5>
+        <table class="table mb-4">
+            <thead class="text-white">
+                <tr>
+                    <th class="text-center text-white">Image</th>
+                    <th class="text-center text-white">Name</th>
+                    <th class="text-center text-white">Available</th>
+                    <th class="text-center text-white">Quantity</th>
+                    <th class="text-center text-white">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td class="text-center align-middle text-white">
+                            <img style="width: 80px"
+                                 src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </td>
+                        <td class="align-middle text-white">
+                            <a href="{% url 'app:show_product' product.id %}">
+                                {{ product.name }}
+                            </a>
+                        </td>
+                        <td class="text-center align-middle text-white">
+                            {{ product.get_available }}
+                        </td>
+                        <td class="text-right align-middle text-white pr-3">
+                            {{ product.quantity }}
+                        </td>
+                        <td class="text-right align-middle text-white pr-3">
+                            {{ product.price }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div style="font-size: 14px; margin-bottom:28px">
+            {% if products.has_other_pages %}
+                <ul class="pagination bg-dark">
+                    {% if products.has_previous %}
+                        <li class="page-item text-warning"><a class="page-link" href="?page={{ products.previous_page_number }}&name={{ name }}">Back</a></li>
+                    {% else %}
+                        <li class="page-item disabled text-warning"><a class="page-link" href="#" tabindex="-1">Back</a></li>
+                    {% endif %}
+                    {% for i in products.paginator.page_range %}
+                        {% if products.number == i %}
+                            <li class="page-item active text-warning"><a class="page-link" href="#">{{ i }}</a></li>
+                        {% else %}
+                            <li class="page-item text-warning"><a class="page-link" href="?page={{ i }}&name={{ name }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if products.has_next %}
+                        <li class="page-item text-warning"><a class="page-link" href="?page={{ products.next_page_number }}&name={{ name }}">Next</a></li>
+                    {% else %}
+                        <li class="page-item disabled text-warning"><a class="page-link" href="#" tabindex="-1">Next</a></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+            {% endif %}
+        </div>
+    </main>
+  {% endblock %}
+
+
+

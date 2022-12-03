@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Warhammer Chapters
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container-sm">
+            <div
+                    id="carouselExampleInterval"
+                    class="carousel slide"
+                    data-bs-ride="carousel"
+            >
+                <div class="carousel-inner col-10 m-auto">
+                    {% for item in chapters %}
+                        <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}" data-bs-interval="10000">
+                            <img src="{% static item.image.path %}" alt="{{ item.image.name }}" class="d-block w-100">
+                        </div>
+                    {% endfor %}
+                </div>
+                <button
+                        class="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#carouselExampleInterval"
+                        data-bs-slide="prev"
+                >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                        class="carousel-control-next"
+                        type="button"
+                        data-bs-target="#carouselExampleInterval"
+                        data-bs-slide="next"
+                >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <br/><br/>
+
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            {% for item in chapters %}
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="headngOne{{ forloop.counter }}">
+                        <button
+                            class="accordion-button collapsed text-white bg-dark"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne{{ forloop.counter }}"
+                            aria-expanded="false"
+                            aria-controls="collapseOne{{ forloop.counter }}"
+                        >
+                            {{ item.name }}
+                        </button>
+                    </h2>
+                    <div
+                        id="collapseOne{{ forloop.counter }}"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingOne{{ forloop.counter }}"
+                        data-bs-parent="#accordionFlushExample"
+                    >
+                        <div class="accordion-body">
+                            <code>{{ item.catchphrase }}</code>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Quicksand&display=swap');
+
+body {
+  background-color: #1c1f22;
+}
+
+main {
+  margin-top: 72px;
+}
+
+#side_nav {
+  min-width: 160px;
+  max-width: 160px;
+}
+
+.content {
+  min-height: 100vh;
+  width: 100%;
+}
+
+hr.h-color {
+  background: #eee;
+}
+
+.sidebar li.active {
+  margin-top: 12px;
+  width: fit-content;
+  height: fit-content;
+  background: #eee;
+  color: #1c1f22;
+  border-radius: 8px;
+}
+
+.sidebar li.active a {
+  color:#1c1f22;
+}
+
+.sidebar li.active a:hover {
+  background: #f1c70b;
+  color: rgb(61, 29, 29);
+  border-radius: 8px;
+}
+
+.siderbar li a {
+  color: #eee;
+}
+
+:root {
+  --bs-body-font-family: 'MedievalSharp', cursive;
+}

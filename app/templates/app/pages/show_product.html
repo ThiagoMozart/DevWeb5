@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Warhammer Show Product
+{% endblock %}
+
+{% block body %}
+     <div class='mb-4'>
+      <h5 class="text-warning">Your selected Product</h5>
+      <hr class='mt-0'>
+   </div>
+    <div style="min-height: 322px">
+       {% if messages %}
+          <div class="mb-3">
+             {% for message in messages %}
+                <ul class="list-group rounded">
+                   <li style="padding-top: 7px; padding-bottom: 7px"
+                       class="list-group-item list-group-item-info">
+                      {{ message }}
+                   </li>
+                </ul>
+             {% endfor %}
+          </div>
+       {% endif %}
+
+       <div class="row mb-3">
+          <div class="col-lg-3 col-md-4">
+              {% if product.image %}
+                <img class="mr-3" style="width: 210px"
+                    src="{{product.image.url}}" alt="{{ product.name }}">
+              {% else %}
+                  <div class="text-md-center text-warning mb-md-0 mb-2">No image found</div>
+              {% endif %}
+          </div>
+          <div class="col-lg-9 col-md-8">
+             <div class="row">
+                <div class="col-xl-2 col-lg-3 col-4 font-weight-bold text-warning mb-1">Name</div>
+                <div class="col-xl-10 col-lg-9 col-8 text-white">{{ product.name }}</div>
+                <div class="col-xl-2 col-lg-3 col-4 font-weight-bold text-warning mb-1">Price</div>
+                <div class="col-xl-10 col-lg-9 col-8 text-white">{{ product.price }}</div>
+                <div class="col-xl-2 col-lg-3 col-4 font-weight-bold text-warning mb-1">Stock</div>
+                <div class="col-xl-10 col-lg-9 col-8 text-white">{{ product.quantity }}</div>
+                <div class="col-xl-2 col-lg-3 col-4 font-weight-bold text-warning mb-1">Available</div>
+                <div class="col-xl-10 col-lg-9 col-8 text-white">{{ product.get_available }}</div>
+             </div>
+          </div>
+       </div>
+
+        {% if product.id %}
+            <div class="form-group row">
+                <div class="col-12">
+                    <div class="form-inline">
+                        <a href="{% url 'app:edit_product' product.id %}" class="btn btn-warning mr-3">Edit</a>
+
+                        <form action="{% url 'app:remove_product' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

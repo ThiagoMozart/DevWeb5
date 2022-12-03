@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Warhammer Selling
+{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="mb-4">
+            <h5 class="text-warning">Register a Product</h5>
+            <hr class="mt-0">
+        </div>
+        <form action="{% url 'app:selling' %}" method="post" class="pb-4" enctype="multipart/form-data" style="min-height: 323px" novalidate>
+            <div class="row mb-xl-3">
+                <div class="col-xl-6">
+                    <div class="row">
+                        <label for="id_name" class="col-xl-2 font-weight-bold text-white">Name</label>
+                        <div class="col-xl-10">
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                                    {%for error in form.name.errors  %}
+                                        <snall>{{ error }}</snall>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="row">
+                        <label for="id_price" class="col-xl-2 font-weight-bold text-white">Price</label>
+                        <div class="col-xl-10">
+                            {{ form.price }}
+                             {% if form.price.errors %}
+                                <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                                    {%for error in form.price.errors  %}
+                                        <snall>{{ error }}</snall>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-xl-1">
+                <div class="col-xl-6">
+                    <div class="row">
+                        <label for="id_quantity" class="col-xl-2 font-weight-bold text-white">Stock</label>
+                        <div class="col-xl-10">
+                            {{ form.quantity }}
+                             {% if form.quantity.errors %}
+                                <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                                    {%for error in form.quantity.errors  %}
+                                        <snall>{{ error }}</snall>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="row mb-3">
+                         <div class="col-xl-6 w-100">
+                            <div class="row">
+                                <label for="id_image" class="col-xl-2 font-weight-bold text-white">Image</label>
+                                <div class="col-xl-10">
+                                    {{ form.image }}
+                                     {% if form.image.errors %}
+                                    <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                                        {%for error in form.image.errors  %}
+                                            <snall>{{ error }}</snall>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="row">
+                                <div class="offset-xl-3 col-xl-9">
+                                    <div class="form-check pl-0 mt-xl-0 mt-2">
+                                        {{ form.available }}
+                                        <label for="id_available" class="form-check-label text-white">Available</label>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 w-100">
+                    <div class="row">
+                        <label for="id_cnpj" class="col-xl-2 font-weight-bold text-white">CNPJ</label>
+                        <div class="col-xl-10">
+                            {{ form.cnpj }}
+                             {% if form.cnpj.errors %}
+                                <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                                    {%for error in form.cnpj.errors  %}
+                                        <snall>{{ error }}</snall>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-xl-12">
+                    {% csrf_token %}
+                    <button id="button" type="submit" class="btn btn-warning text-white">
+                        {% if 'product_id' in request.session %}
+                            Edit
+                        {% else %}
+                            Confirm
+                        {% endif %}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </main>
+ {% endblock %}
