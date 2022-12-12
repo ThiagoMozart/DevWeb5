@@ -21,9 +21,11 @@ def index(request):
 
 def shop(request):
     form = SearchProductForm(request.GET)
+
     if form.is_valid():
         name = form.cleaned_data['name']
         products = Product.objects.filter(name__icontains=name).order_by("name")
+
         paginator = Paginator(products, 3)
         page = request.GET.get('page')
         page_obj = paginator.get_page(page)
@@ -46,7 +48,7 @@ def selling(request):
 
         if product_id:
             product = get_object_or_404(Product, pk=product_id)
-            product_form = ProductForm(request.POST,  request.FILES, instance=product)
+            product_form = ProductForm(request.POST, request.FILES, instance=product)
 
         else:
             product_form = ProductForm(request.POST, request.FILES)
@@ -96,7 +98,7 @@ def show_product(request, id):
 def edit_product(request, id):
     product = get_object_or_404(Product, pk=id)
     product_form = ProductForm(instance=product)
-    request.session[product.id] = id
+    request.session["product_id"] = id
 
     context = {
         "phrase": "Edit Product",
